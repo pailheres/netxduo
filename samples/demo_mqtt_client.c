@@ -28,7 +28,7 @@
 /* MQTT Demo defines */
 
 /* IP Address of the local server. */
-#define  LOCAL_SERVER_ADDRESS (IP_ADDRESS(192, 168, 1, 1))
+#define  LOCAL_SERVER_ADDRESS (IP_ADDRESS(10, 0, 10, 1))
 
 
 /*****************************************************************************************/
@@ -87,24 +87,23 @@ static VOID my_notify_func(NXD_MQTT_CLIENT* client_ptr, UINT number_of_messages)
     NX_PARAMETER_NOT_USED(number_of_messages);
     tx_event_flags_set(&mqtt_app_flag, DEMO_MESSAGE_EVENT, TX_OR);
     return;
-  
 }
 
 void thread_mqtt_entry(NX_IP *ip_ptr, NX_PACKET_POOL *pool_ptr);
 
-static ULONG    error_counter;
+static ULONG error_counter;
 void thread_mqtt_entry(NX_IP *ip_ptr, NX_PACKET_POOL *pool_ptr)
 {
-UINT status;
-NXD_ADDRESS server_ip;
-ULONG events;
-UINT topic_length, message_length;
+  UINT status;
+  NXD_ADDRESS server_ip;
+  ULONG events;
+  UINT topic_length, message_length;
 
     /* Create MQTT client instance. */
     status = nxd_mqtt_client_create(&mqtt_client, "my_client", CLIENT_ID_STRING, STRLEN(CLIENT_ID_STRING),
                                     ip_ptr, pool_ptr, (VOID*)mqtt_client_stack, sizeof(mqtt_client_stack), 
                                     MQTT_THREAD_PRIORTY, NX_NULL, 0);
-    
+
     if (status)
     {
         printf("Error in creating MQTT client: 0x%02x\n", status);

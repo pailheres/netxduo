@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.26.0 FATAL_ERROR)
 
 # Set up the project
 project(netxduo
@@ -71,6 +71,7 @@ target_include_directories(${PROJECT_NAME}
     ${CUSTOM_INC_DIR}
 )
 target_compile_definitions(${PROJECT_NAME} PUBLIC "NX_INCLUDE_USER_DEFINE_FILE" )
+target_compile_definitions(${PROJECT_NAME} PUBLIC "NX_DISABLE_IPV6" )
 
 # Enable a build target that produces a ZIP file of all sources
 set(CPACK_SOURCE_GENERATOR "ZIP")
