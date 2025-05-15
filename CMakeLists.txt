@@ -72,6 +72,9 @@ target_include_directories(${PROJECT_NAME}
 )
 target_compile_definitions(${PROJECT_NAME} PUBLIC "NX_INCLUDE_USER_DEFINE_FILE" )
 target_compile_definitions(${PROJECT_NAME} PUBLIC "NX_DISABLE_IPV6" )
+target_compile_definitions(${PROJECT_NAME} PUBLIC "NX_ENABLE_INTERFACE" )
+target_compile_definitions(${PROJECT_NAME} PUBLIC "NX_ENABLE_VLAN" )
+target_compile_definitions(${PROJECT_NAME} PUBLIC "NX_DRIVER_DEFERRED_PROCESSING" )
 
 # Enable a build target that produces a ZIP file of all sources
 set(CPACK_SOURCE_GENERATOR "ZIP")
