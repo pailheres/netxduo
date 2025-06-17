@@ -127,7 +127,10 @@ ULONG         tcpip_offload;
        a waiting socket/thread during this routine and before we are done
        using the header.  */
     /*lint -e{927} -e{826} suppress cast of pointer to pointer, since it is necessary  */
-    tcp_header_copy =  *((NX_TCP_HEADER *)packet_ptr -> nx_packet_prepend_ptr);
+
+    // tcp_header_copy =  *((NX_TCP_HEADER *)packet_ptr -> nx_packet_prepend_ptr);
+    // we have to do this way, since packet contain layer 2, tcp header is not 32 bits align
+    memcpy(&tcp_header_copy, packet_ptr->nx_packet_prepend_ptr, sizeof(NX_TCP_HEADER));
 
     /* Get the size of the TCP header.  */
     header_length =  (tcp_header_copy.nx_tcp_header_word_3 >> NX_TCP_HEADER_SHIFT) * (ULONG)sizeof(ULONG);
